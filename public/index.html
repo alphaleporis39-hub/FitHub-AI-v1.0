@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="FitHub AI - intelligent fitness & wellness platform with AI workout plans, diet planner, calorie tracker, and progress analytics." />
+  <meta name="theme-color" content="#0c0f17" />
+  <title>FitHub AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ====================================================================
+       AUTH SCREEN
+       ==================================================================== -->
+  <div id="auth" class="auth-wrap">
+    <div class="glass auth-card">
+      <h1 class="logo">FitHub <span>AI</span></h1>
+      <p class="tagline">Your intelligent fitness companion</p>
+
+      <div class="tabs">
+        <button id="tabLogin" class="tab active" type="button">Login</button>
+        <button id="tabRegister" class="tab" type="button">Sign Up</button>
+      </div>
+
+      <!-- Login form -->
+      <form id="loginForm" class="form" autocomplete="on">
+        <input name="username" placeholder="Username" autocomplete="username" required />
+        <input name="password" type="password" placeholder="Password" autocomplete="current-password" required />
+        <button class="btn primary" type="submit">Login</button>
+      </form>
+
+      <!-- Register form -->
+      <form id="registerForm" class="form hidden" autocomplete="on">
+        <input name="username" placeholder="Choose a username" autocomplete="username" required />
+        <input name="password" type="password" placeholder="Create a password" autocomplete="new-password" required />
+        <input name="confirm" type="password" placeholder="Confirm password" autocomplete="new-password" required />
+        <button class="btn primary" type="submit">Create Account</button>
+      </form>
+
+      <div class="divider">or</div>
+      <button id="demoBtn" class="btn ghost" type="button" style="width:100%">🚀 Try Demo Account</button>
+
+      <p id="authMsg" class="msg"></p>
+    </div>
+    <footer class="footer">Made with <span class="heart">❤️</span> by Mohit Chaudhary</footer>
+  </div>
+
+  <!-- ====================================================================
+       APP SHELL
+       ==================================================================== -->
+  <div id="app" class="app hidden">
+
+    <!-- Mobile top bar with animated hamburger -->
+    <header class="topbar glass">
+      <h2 class="logo small" style="margin:0">FitHub <span>AI</span></h2>
+      <button id="hamburger" class="hamburger" type="button" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <!-- Sidebar navigation -->
+    <aside id="sidebar" class="sidebar glass">
+      <h2 class="logo small">FitHub <span>AI</span></h2>
+      <nav id="nav">
+        <a data-view="dashboard" class="active">📊 Dashboard</a>
+        <a data-view="calculators">🧮 Calculators</a>
+        <a data-view="workout">💪 Workout Planner</a>
+        <a data-view="exercises">📚 Exercise Library</a>
+        <a data-view="diet">🥗 Diet Planner</a>
+        <a data-view="tracker">🍽️ Calorie Tracker</a>
+        <a data-view="progress">📈 Progress</a>
+        <a data-view="chat">🤖 AI Coach</a>
+        <a data-view="profile">👤 Profile</a>
+        <a data-view="settings">⚙️ Settings</a>
+        <a data-view="about">ℹ️ About</a>
+        <a id="logoutBtn">🚪 Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Overlay (mobile sidebar backdrop) -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Main content -->
+    <main class="content">
+      <div id="views"></div>
+      <footer class="footer">Made with <span class="heart">❤️</span> by Mohit Chaudhary</footer>
+    </main>
+  </div>
+
+  <!-- ====================================================================
+       PROFILE SETUP WIZARD (first login)
+       ==================================================================== -->
+  <div id="wizard" class="modal hidden">
+    <div class="glass modal-card">
+      <h2>Complete Your Profile</h2>
+      <p class="muted">Help us personalize your plans. You can skip and finish later from your Profile.</p>
+      <form id="wizardForm" class="form" style="margin-top:1rem">
+        <div class="grid">
+          <input name="age" type="number" placeholder="Age" min="1" max="120" />
+          <select name="gender">
+            <option value="">Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <input name="height" type="number" placeholder="Height (cm)" min="50" max="260" />
+          <input name="weight" type="number" placeholder="Weight (kg)" min="20" max="400" />
+          <select name="goal">
+            <option value="">Fitness Goal</option>
+            <option>Muscle Gain</option>
+            <option>Fat Loss</option>
+            <option>Weight Maintenance</option>
+            <option>Strength</option>
+            <option>Endurance</option>
+          </select>
+          <select name="activity">
+            <option value="">Activity Level</option>
+            <option value="sedentary">Sedentary</option>
+            <option value="light">Light</option>
+            <option value="moderate">Moderate</option>
+            <option value="active">Active</option>
+            <option value="very">Very Active</option>
+          </select>
+        </div>
+        <div class="row" style="margin-top:.5rem">
+          <button type="button" id="skipWizard" class="btn ghost">Skip for now</button>
+          <button type="submit" class="btn primary">Save & Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

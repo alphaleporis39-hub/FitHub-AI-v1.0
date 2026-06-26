@@ -1,0 +1,34 @@
+{
+  "name": "fithub-ai-v3",
+  "version": "3.0.0",
+  "description": "FitHub AI - an intelligent fitness & wellness platform with AI workout plans, diet planner, calorie tracker, progress analytics, and an offline AI coach. Built by Mohit Chaudhary.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "fitness",
+    "health",
+    "workout",
+    "diet",
+    "calorie-tracker",
+    "bmi",
+    "express",
+    "sqlite",
+    "jwt",
+    "fithub-ai"
+  ],
+  "author": "Mohit Chaudhary",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.3.0",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
