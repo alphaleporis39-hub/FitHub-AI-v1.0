@@ -2,4 +2,4 @@ User-agent: *
 
 Allow: /
 
-Sitemap: https://fithubai.in/sitemaps.xml
+Sitemap: https://fithubai.in/sitemap.xml
