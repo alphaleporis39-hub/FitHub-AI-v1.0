@@ -913,6 +913,12 @@ app.post("/api/chat", auth, async (req, res, next) => {
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 
+/* SPA view routes (serve index.html for SEO-friendly URLs listed in sitemap) */
+const spaViews = ["dashboard", "calculators", "workout", "exercises", "diet", "tracker", "progress", "chat", "profile", "settings", "about"];
+spaViews.forEach((view) => {
+  app.get("/" + view, (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
+});
+
 /* ========================================================================== */
 /*  404 + GLOBAL ERROR HANDLERS                                                */
 /* ========================================================================== */

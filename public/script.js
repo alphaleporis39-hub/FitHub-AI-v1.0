@@ -282,7 +282,7 @@ async function renderDashboard(v) {
   const quote = quotes[Math.floor(Math.random() * quotes.length)];
 
   v.innerHTML = `
-    <h3 class="view-title">Welcome back, ${escapeHtml(d.username)} 👋</h3>
+    <h1 class="view-title">Welcome back, ${escapeHtml(d.username)} 👋</h1>
     <div class="card quote-card"><p>“${escapeHtml(quote)}”</p></div>
 
     <div class="grid">
@@ -355,7 +355,7 @@ async function renderDashboard(v) {
 
 async function renderCalculators(v) {
   v.innerHTML = `
-    <h3 class="view-title">Fitness Calculators</h3>
+    <h1 class="view-title">Fitness Calculators</h1>
     <div class="card">
       <form id="calcForm" class="form">
         <div class="grid">
@@ -437,7 +437,7 @@ async function renderWorkout(v) {
   workoutSeconds = 0;
 
   v.innerHTML = `
-    <h3 class="view-title">Workout Planner</h3>
+    <h1 class="view-title">Workout Planner</h1>
     <div class="card">
       <div class="grid">
         <select id="wLevel"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select>
@@ -524,7 +524,7 @@ async function renderWorkout(v) {
 
 async function renderExercises(v) {
   v.innerHTML = `
-    <h3 class="view-title">Exercise Library</h3>
+    <h1 class="view-title">Exercise Library</h1>
     <div class="card">
       <div class="row wrap">
         <input id="exSearch" placeholder="Search exercises..." />
@@ -574,7 +574,7 @@ async function renderDiet(v) {
   const d = await api("/diet/generate", "POST", {});
   const m = d.meals;
   v.innerHTML = `
-    <h3 class="view-title">Diet Planner</h3>
+    <h1 class="view-title">Diet Planner</h1>
     <div class="grid">
       <div class="card stat"><h4>Daily Target</h4><div class="big">${d.calorieGoal}</div><span class="muted">kcal</span></div>
       <div class="card stat"><h4>Protein</h4><div class="big">${d.proteinGoal ?? "--"}</div><span class="muted">g</span></div>
@@ -597,7 +597,7 @@ async function renderDiet(v) {
 
 async function renderTracker(v) {
   v.innerHTML = `
-    <h3 class="view-title">Calorie Tracker</h3>
+    <h1 class="view-title">Calorie Tracker</h1>
     <div id="trackerTotals" class="grid"></div>
 
     <div class="card" style="margin-top:1rem">
@@ -714,7 +714,7 @@ async function renderProgress(v) {
   const bData = prog.map((p) => ({ date: (p.date || "").slice(5), bmi: p.bmi || 0 }));
 
   v.innerHTML = `
-    <h3 class="view-title">Progress Tracker</h3>
+    <h1 class="view-title">Progress Tracker</h1>
     <div class="grid two">
       <div class="card">
         <h4>Weight History (kg)</h4>
@@ -745,7 +745,7 @@ async function renderProgress(v) {
 
 async function renderChat(v) {
   v.innerHTML = `
-    <h3 class="view-title">AI Fitness Coach</h3>
+    <h1 class="view-title">AI Fitness Coach</h1>
     <div class="card chat-card">
       <div id="chatLog" class="chat-log">
         <div class="bubble bot">Hi! I'm your FitHub AI coach. Ask me about workouts, diet, protein, water, or motivation. 💪</div>
@@ -790,7 +790,7 @@ async function renderChat(v) {
 async function renderProfile(v) {
   const p = await api("/profile");
   v.innerHTML = `
-    <h3 class="view-title">My Profile</h3>
+    <h1 class="view-title">My Profile</h1>
     <div class="card">
       <form id="pForm" class="form">
         <div class="profile-photo">
@@ -868,7 +868,7 @@ async function renderProfile(v) {
 async function renderSettings(v) {
   const s = await api("/settings");
   v.innerHTML = `
-    <h3 class="view-title">Settings</h3>
+    <h1 class="view-title">Settings</h1>
 
     <div class="card">
       <h4>Theme</h4>
@@ -962,7 +962,7 @@ async function renderSettings(v) {
 
 function renderAbout(v) {
   v.innerHTML = `
-    <h3 class="view-title">FitHub AI</h3>
+    <h1 class="view-title">FitHub AI</h1>
     <div class="card">
       <p>FitHub AI is an intelligent fitness and wellness platform created by
       <b>Mohit Chaudhary</b>. It helps users achieve their goals with AI-generated
