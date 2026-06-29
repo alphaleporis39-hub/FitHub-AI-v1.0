@@ -211,6 +211,18 @@ function auth(req, res, next) {
   }
 }
 
+/** Optional JWT auth - attaches req.user if valid token, continues if not. */
+function optionalAuth(req, res, next) {
+  try {
+    const header = req.headers.authorization || "";
+    const token = header.startsWith("Bearer ") ? header.slice(7) : null;
+    if (token) req.user = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch (e) {
+    next();
+  }
+}
+
 /* ========================================================================== */
 /*  HELPERS                                                                    */
 /* ========================================================================== */
@@ -526,7 +538,7 @@ app.delete("/api/account", auth, (req, res, next) => {
 /*  CALCULATOR ROUTES (BMI / Calories / Protein / Water)                      */
 /* ========================================================================== */
 
-app.post("/api/calculate", auth, (req, res, next) => {
+app.post("/api/calculate", optionalAuth, (req, res, next) => {
   try {
     const { age, gender, height, weight, goal, activity } = req.body || {};
     const p = { age, gender, height, weight, goal, activity };
@@ -641,7 +653,7 @@ app.post("/api/water", auth, (req, res, next) => {
 /*  EXERCISE LIBRARY ROUTES                                                    */
 /* ========================================================================== */
 
-app.get("/api/exercises", auth, (req, res, next) => {
+app.get("/api/exercises", optionalAuth, (req, res, next) => {
   try {
     const { search = "", category = "" } = req.query || {};
     let list = EXERCISE_LIBRARY;
@@ -749,7 +761,7 @@ app.post("/api/diet/generate", auth, (req, res, next) => {
 /*  MEAL / FOOD LOGGING ROUTES                                                 */
 /* ========================================================================== */
 
-app.get("/api/foods", auth, (req, res, next) => {
+app.get("/api/foods", optionalAuth, (req, res, next) => {
   try {
     const q = String((req.query && req.query.search) || "").toLowerCase();
     const list = q ? FOOD_DB.filter((f) => f.name.toLowerCase().includes(q)) : FOOD_DB;
@@ -876,12 +888,17 @@ function offlineChatReply(message, profile) {
   return "Great question! Focus on consistency: train regularly, eat enough protein, stay hydrated, and sleep well. Try the Workout Planner and Diet Planner for a tailored plan toward " + goal + ".";
 }
 
-app.post("/api/chat", auth, async (req, res, next) => {
+app.post("/api/chat", optionalAuth, async (req, res, next) => {
   try {
     const message = (req.body && req.body.message) || "";
     if (!message.trim()) return res.status(400).json({ error: "Message is required" });
 
-    const profile = db.prepare("SELECT goal, weight, height, age FROM profile WHERE user_id = ?").get(req.user.id) || {};
+    let profile = {};
+    if (req.user) {
+      profile = db.prepare("SELECT goal, weight, height, age FROM profile WHERE user_id = ?").get(req.user.id) || {};
+    } else if (req.body && req.body.profile) {
+      profile = req.body.profile;
+    }
 
     // Offline mode (default): no external API key configured.
     if (!AI_API_KEY) {

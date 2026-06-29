@@ -107,13 +107,31 @@
 <body>
 
   <!-- ====================================================================
-       AUTH SCREEN
+       GET STARTED SCREEN (first visit, anonymous)
        ==================================================================== -->
-  <div id="auth" class="auth-wrap">
+  <div id="getStarted" class="auth-wrap">
     <div class="glass auth-card">
       <h1 class="logo">FitHub <span>AI</span></h1>
       <p class="tagline">Your intelligent fitness companion</p>
+      <form id="getStartedForm" class="form" autocomplete="on">
+        <input name="name" placeholder="What should we call you?" autocomplete="name" required maxlength="30" />
+        <button class="btn primary" type="submit">Get Started</button>
+      </form>
+      <div class="divider">or</div>
+      <button id="demoBtn" class="btn ghost" type="button" style="width:100%">🚀 Try Demo Account</button>
+      <p class="muted" style="margin-top:.8rem; font-size:.85rem">
+        Already have an account? <a href="#" id="showLoginLink">Login / Sign Up</a>
+      </p>
+    </div>
+    <footer class="footer">Made with <span class="heart">❤️</span> by Mohit Chaudhary</footer>
+  </div>
 
+  <!-- ====================================================================
+       LOGIN/REGISTER MODAL (shown via link)
+       ==================================================================== -->
+  <div id="auth" class="modal hidden">
+    <div class="glass modal-card">
+      <h2>Welcome Back</h2>
       <div class="tabs">
         <button id="tabLogin" class="tab active" type="button">Login</button>
         <button id="tabRegister" class="tab" type="button">Sign Up</button>
@@ -138,8 +156,8 @@
       <button id="demoBtn" class="btn ghost" type="button" style="width:100%">🚀 Try Demo Account</button>
 
       <p id="authMsg" class="msg"></p>
+      <button id="closeAuthModal" class="btn ghost" type="button" style="margin-top:.5rem">Cancel</button>
     </div>
-    <footer class="footer">Made with <span class="heart">❤️</span> by Mohit Chaudhary</footer>
   </div>
 
   <!-- ====================================================================
@@ -170,6 +188,7 @@
         <a data-view="profile">👤 Profile</a>
         <a data-view="settings">⚙️ Settings</a>
         <a data-view="about">ℹ️ About</a>
+        <a id="navLoginLink" class="hidden">🔐 Login / Sign Up</a>
         <a id="logoutBtn">🚪 Logout</a>
       </nav>
     </aside>
